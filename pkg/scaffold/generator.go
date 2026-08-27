@@ -1,11 +1,15 @@
 package scaffold
 
 import (
+	"embed"
 	"fmt"
 	"os"
 	"path/filepath"
 	"text/template"
 )
+
+//go:embed templates/*
+var templateFS embed.FS
 
 type Config struct {
 	AppName    string
@@ -37,8 +41,8 @@ func Generate(cfg Config) error {
 			return fmt.Errorf("failed to create parent dir for %s: %w", outPath, err)
 		}
 
-		// Parse the template
-		tmpl, err := template.ParseFiles(tmplPath)
+		// Parse the template from the embedded filesystem
+		tmpl, err := template.ParseFS(templateFS, tmplPath)
 		if err != nil {
 			return fmt.Errorf("failed to parse template %s: %w", tmplPath, err)
 		}
@@ -48,10 +52,11 @@ func Generate(cfg Config) error {
 		if err != nil {
 			return fmt.Errorf("failed to create file %s: %w", outPath, err)
 		}
-		defer f.Close()
 
 		// Execute the template with our config variables
-		if err := tmpl.Execute(f, cfg); err != nil {
+		err = tmpl.Execute(f, cfg)
+		f.Close()
+		if err != nil {
 			return fmt.Errorf("failed to execute template %s: %w", tmplPath, err)
 		}
 	}

@@ -37,3 +37,4 @@ coverage.html
 
 .venv/
 .terraform/
+test-output/

@@ -1,0 +1,31 @@
+const express = require('express');
+const helmet = require('helmet');
+
+const app = express();
+const port = process.env.PORT || {{.Port}};
+
+// Apply standard security headers
+app.use(helmet());
+app.use(express.json());
+
+// Readiness/Liveness probe for Kubernetes
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: '{{.AppName}}' });
+});
+
+app.get('/', (req, res) => {
+  res.send('Welcome to {{.AppName}} (Golden Path Scaffolding)');
+});
+
+const server = app.listen(port, () => {
+  console.log(`{{.AppName}} listening on port ${port}`);
+});
+
+// Graceful shutdown handling
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.log('HTTP server closed');
+    process.exit(0);
+  });
+});
