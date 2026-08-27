@@ -3,17 +3,23 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/your-username/golden-path-cli/pkg/scaffold"
 )
 
-func main() {
-	name := flag.String("name", "my-secure-service", "Name of the microservice")
-	port := flag.Int("port", 3000, "Port the application listens on")
-	out := flag.String("out", "./output", "Output directory for the scaffolded project")
+func run(args []string, outStream, errStream io.Writer) int {
+	flags := flag.NewFlagSet("golden-path-cli", flag.ContinueOnError)
+	flags.SetOutput(errStream)
 
-	flag.Parse()
+	name := flags.String("name", "my-secure-service", "Name of the microservice")
+	port := flags.Int("port", 3000, "Port the application listens on")
+	out := flags.String("out", "./output", "Output directory for the scaffolded project")
+
+	if err := flags.Parse(args); err != nil {
+		return 1
+	}
 
 	cfg := scaffold.Config{
 		AppName:    *name,
@@ -21,17 +27,23 @@ func main() {
 		OutputPath: *out,
 	}
 
-	fmt.Printf("Scaffolding Golden Path project '%s' on port %d into %s...\n", cfg.AppName, cfg.Port, cfg.OutputPath)
+	fmt.Fprintf(outStream, "Scaffolding Golden Path project '%s' on port %d into %s...\n", cfg.AppName, cfg.Port, cfg.OutputPath)
 
 	err := scaffold.Generate(cfg)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error scaffolding project: %v\n", err)
-		os.Exit(1)
+		fmt.Fprintf(errStream, "Error scaffolding project: %v\n", err)
+		return 1
 	}
 
-	fmt.Println("✅ Successfully scaffolded!")
-	fmt.Println("\nNext steps:")
-	fmt.Printf("  cd %s\n", cfg.OutputPath)
-	fmt.Println("  npm install")
-	fmt.Println("  npm start")
+	fmt.Fprintln(outStream, "✅ Successfully scaffolded!")
+	fmt.Fprintln(outStream, "\nNext steps:")
+	fmt.Fprintf(outStream, "  cd %s\n", cfg.OutputPath)
+	fmt.Fprintln(outStream, "  npm install")
+	fmt.Fprintln(outStream, "  npm start")
+	
+	return 0
+}
+
+func main() {
+	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
 }
