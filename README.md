@@ -22,7 +22,7 @@ While tools like Backstage provide UI-based scaffolding (via Software Templates)
 
 ## Tech Stack
 - **Language**: Go 1.21+
-- **Templating**: `text/template`
+- **Templating**: `text/template` & `embed.FS` (Templates baked directly into the binary)
 - **Output Target**: Node.js/Express, Docker, Kubernetes, GitHub Actions
 
 ## Decision Log
@@ -38,7 +38,7 @@ While tools like Backstage provide UI-based scaffolding (via Software Templates)
 ```text
 golden-path-cli/
 ├── pkg/scaffold/           # Generator logic for mapping and executing templates
-├── templates/              # The "Golden Path" templates (.tmpl)
+├── templates/              # The "Golden Path" templates (.tmpl) (Embedded in binary)
 │   ├── Dockerfile.tmpl
 │   ├── k8s-deployment.yaml.tmpl
 │   ├── k8s-service.yaml.tmpl
