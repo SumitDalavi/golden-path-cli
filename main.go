@@ -40,7 +40,7 @@ func run(args []string, outStream, errStream io.Writer) int {
 	fmt.Fprintf(outStream, "  cd %s\n", cfg.OutputPath)
 	fmt.Fprintln(outStream, "  npm install")
 	fmt.Fprintln(outStream, "  npm start")
-	
+
 	return 0
 }
 

@@ -93,11 +93,11 @@ func TestGenerateExecuteError(t *testing.T) {
 func TestGenerateCreateFileError(t *testing.T) {
 	tmpDir := t.TempDir()
 	outDir := filepath.Join(tmpDir, "output")
-	
+
 	os.MkdirAll("templates", 0755)
 	defer os.RemoveAll("templates")
 	os.WriteFile("templates/Dockerfile.tmpl", []byte("FROM alpine"), 0644)
-	
+
 	// Create outDir and a directory named Dockerfile so os.Create fails
 	os.MkdirAll(filepath.Join(outDir, "Dockerfile"), 0755)
 
@@ -115,11 +115,11 @@ func TestGenerateCreateFileError(t *testing.T) {
 func TestGenerateNestedDirError(t *testing.T) {
 	tmpDir := t.TempDir()
 	outDir := filepath.Join(tmpDir, "output")
-	
+
 	os.MkdirAll("templates", 0755)
 	defer os.RemoveAll("templates")
 	os.WriteFile("templates/k8s-deployment.yaml.tmpl", []byte("apiVersion: apps/v1"), 0644)
-	
+
 	os.MkdirAll(outDir, 0755)
 	// Make outDir read-only so nested MkdirAll fails
 	os.Chmod(outDir, 0500)
