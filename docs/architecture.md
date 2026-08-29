@@ -1,4 +1,5 @@
 # Golden Path CLI Architecture
+> Maturity: Full Prototype
 
 ## Overview
 The `golden-path-cli` is a Go-based standalone executable designed for Platform Engineering teams to scaffold secure, standardized microservices. Instead of distributing templates as separate files, the templates are baked directly into the compiled binary using Go's `embed` package, ensuring the tool is highly portable.
