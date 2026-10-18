@@ -6,6 +6,7 @@
 [![CI Pipeline](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/SumitDalavi/golden-path-cli)](https://github.com/SumitDalavi/golden-path-cli/releases)
 [![Release Workflow](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/SumitDalavi/golden-path-cli.svg)](https://pkg.go.dev/github.com/SumitDalavi/golden-path-cli)
 
 A portfolio project demonstrating Platform Engineering concepts by building a Go-based CLI tool. This CLI scaffolds new microservices ("The Golden Path") with DevSecOps best practices — like distroless containers, non-root security contexts, and CI scanning — baked in by default.
 
