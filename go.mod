@@ -1,3 +1,3 @@
-module github.com/your-username/golden-path-cli
+module github.com/SumitDalavi/golden-path-cli
 
 go 1.20

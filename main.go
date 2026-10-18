@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/your-username/golden-path-cli/pkg/scaffold"
+	"github.com/SumitDalavi/golden-path-cli/pkg/scaffold"
 )
 
 func run(args []string, outStream, errStream io.Writer) int {
