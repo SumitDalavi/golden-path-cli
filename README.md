@@ -3,6 +3,10 @@
 
 # Developer Golden Path CLI
 
+[![CI Pipeline](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/golden-path-cli)](https://github.com/SumitDalavi/golden-path-cli/releases)
+[![Release Workflow](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml)
+
 A portfolio project demonstrating Platform Engineering concepts by building a Go-based CLI tool. This CLI scaffolds new microservices ("The Golden Path") with DevSecOps best practices — like distroless containers, non-root security contexts, and CI scanning — baked in by default.
 
 ## The Problem
@@ -82,11 +86,21 @@ Notice how `k8s/deployment.yaml` and `Dockerfile` have been securely populated w
 | Security Contexts | `grep runAsNonRoot my-new-service/k8s/deployment.yaml` returns `true`. |
 | Port Injection | `grep 8080 my-new-service/index.js` shows the correct templated port. |
 
+## 🔒 Release & Security Verification
+
+Every tagged release (*.*.*) triggers an automated DevSecOps release workflow:
+1. **Automated Testing:** Runs go test -v ./... across unit tests.
+2. **Binary Packaging:** Compiles standalone CLI binary asset (golden-path-cli-linux-amd64.tar.gz).
+3. **Container Image Build:** Builds the CLI container image (ghcr.io/sumitdalavi/golden-path-cli:<tag>).
+4. **Vulnerability Scanning:** Scans the CLI container using [Aqua Security Trivy](https://github.com/aquasecurity/trivy-action) for HIGH and CRITICAL CVEs.
+5. **SBOM Generation:** Generates a Software Bill of Materials (SBOM) in SPDX JSON format (sbom.spdx.json) using [Anchore Syft](https://github.com/anchore/sbom-action).
+6. **GitHub Release Publishing:** Packages release notes and attaches binary tarball and sbom.spdx.json as release assets.
+
 ## Author
 
 **Sumit Dalavi — Senior DevSecOps / Platform Engineer**
-- [GitHub](https://github.com/your-username)
-- [LinkedIn](https://linkedin.com/in/your-profile)
+- [GitHub](https://github.com/SumitDalavi)
+- [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
 
 
 ## CI & Reliability Updates (August 2026)
