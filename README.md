@@ -1,11 +1,15 @@
 > **NOTE:** This repository is an archival lab or partial prototype. It is not actively maintained and should not be used as a reference for production-grade deployments or performance benchmarks.
 
-
 # Developer Golden Path CLI
 
 [![CI Pipeline](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/SumitDalavi/golden-path-cli)](https://github.com/SumitDalavi/golden-path-cli/releases)
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/golden-path-cli?color=0969da&label=release&logo=github)](https://github.com/SumitDalavi/golden-path-cli/releases)
 [![Release Workflow](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/golden-path-cli/actions/workflows/release.yml)
+[![GHCR Container](https://img.shields.io/badge/ghcr.io-v0.2.0-blue?logo=docker&logoColor=white)](https://github.com/SumitDalavi/golden-path-cli/pkgs/container/golden-path-cli)
+[![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go&logoColor=white)](https://golang.org)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/golden-path-cli/releases/tag/v0.2.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 [![Go Reference](https://pkg.go.dev/badge/github.com/SumitDalavi/golden-path-cli.svg)](https://pkg.go.dev/github.com/SumitDalavi/golden-path-cli)
 
 A portfolio project demonstrating Platform Engineering concepts by building a Go-based CLI tool. This CLI scaffolds new microservices ("The Golden Path") with DevSecOps best practices — like distroless containers, non-root security contexts, and CI scanning — baked in by default.
@@ -89,7 +93,8 @@ Notice how `k8s/deployment.yaml` and `Dockerfile` have been securely populated w
 
 ## 🔒 Release & Security Verification
 
-Every tagged release (*.*.*) triggers an automated DevSecOps release workflow:
+Every tagged release (
+*.*.*) triggers an automated DevSecOps release workflow:
 1. **Automated Testing:** Runs go test -v ./... across unit tests.
 2. **Binary Packaging:** Compiles standalone CLI binary asset (golden-path-cli-linux-amd64.tar.gz).
 3. **Container Image Build:** Builds the CLI container image (ghcr.io/sumitdalavi/golden-path-cli:<tag>).
@@ -102,7 +107,6 @@ Every tagged release (*.*.*) triggers an automated DevSecOps release workflow:
 **Sumit Dalavi — Senior DevSecOps / Platform Engineer**
 - [GitHub](https://github.com/SumitDalavi)
 - [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
-
 
 ## CI & Reliability Updates (August 2026)
 
